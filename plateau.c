@@ -6,12 +6,12 @@
           plateau[l][col]= vide;
        }
     }
-    /*
+    
     plateau[0][0] = blok;
     plateau[0][COL - 1] = blok;
     plateau[LI - 1][0] = blok;
     plateau[LI - 1][COL - 1] = blok;
- */
+ 
     }
  
   char affichesymb(int case){
