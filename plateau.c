@@ -211,3 +211,44 @@ int check_win(int board[LI][COL], int player) {
 }
 return 1;
 
+int zone_valide(int pivot_LI, int pivot_COL, int size) {
+    int offset = size / 2;
+    int debut_LI = pivot_LI - offset;
+    int debut_COL = pivot_COL - offset;
+ 
+    if (debut_LI < 0 || debut_COL < 0) {
+        return 0;
+    }
+
+    if ((debut_LI + size) > LI || (debut_COL + size) > COL) {
+        return 0; 
+    }
+
+    return 1;
+}
+
+
+void rotation_zone(int plateau[LI][COL], int pivot_LI, int pivot_COL, int size, int sens_horloge) {
+    int offset = size / 2;
+    int debut_LI= pivot_LI - offset;
+    int debut_COL = pivot_COL - offset;
+    int temp[size][size];
+
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            temp[i][j] = plateau[debut_LI + i][debut_COL + j];
+        }
+    }
+
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            if (sens_horloge) {
+                plateau[debut_LI + j][debut_COL + (size - 1 - i)] = temp[i][j];
+            } else {
+                plateau[debut_LI + (size - 1 - j)][debut_COL + i] = temp[i][j];
+            }
+        }
+    }
+}
+
+
