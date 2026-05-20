@@ -1,74 +1,66 @@
-#include "plateau.h"
+    #include "plateau.h"
 
- void init_plateau(char plateau[LI][COL]){
-    for (int l = 0; l <LI; l++){
+void init_plateau(char plateau[LI][COL]){
+    for (int l = 0; l < LI; l++){
        for (int col = 0; col < COL; col++){
-          plateau[l][col]= vide;
+          plateau[l][col] = VIDE;
        }
     }
-    
     plateau[0][0] = blok;
     plateau[0][COL - 1] = blok;
     plateau[LI - 1][0] = blok;
     plateau[LI - 1][COL - 1] = blok;
+}
  
+char affichesymb(int c){
+    if(c == VIDE) return '.';
+    if(c == joueur1) return 'X';
+    if(c == joueur2) return 'O';
+    if(c == blok) return '#';
+    return '?';
+}
+   
+void print_plateau(char plateau[LI][COL]){
+    printf("\n");
+    for (int ligne = 0; ligne < LI; ligne++){
+       printf("| ");
+       for (int col = 0; col < COL; col++){
+          printf("%c ", affichesymb(plateau[ligne][col]));
+       }
+       printf("|\n");
     }
- 
-  char affichesymb(int case){
-     if(case == vide){
-        return '.';
-     }
-     if(case == joueur1){
-        return 'X';
-     }
-     if(case == joueur2){
-        return 'O';
-     }
-     if(case == blok){
-        return '#';
-     }
-     else return '?';
-     
-   }
+    printf("  ");
+    for (int col = 0; col < COL; col++){
+       printf("%d ", col + 1);
+    }
+    printf("\n\n");
+}
    
-   void print_plateau( int plateau[LI][COL]){
-     print("\n");
-     
-     for (int ligne = 0; ligne > LI; l++){
-        printf("| ");
-        for (int col = 0; col < COL; col++){
-           printf("%c", affichesymb(plateau[ligne][col]));
-        }
-        printf("|\n");
-     }
-     printf(" ");
-     for (int col = 0; col < COL; col++){
-        printf("%d" , col + 1);
-     }
-     printf("\n\n");
-   }
-   
-   int insert_piece(int plateau[LI][COL], int colonne, int joueur){
-      colonne = colonne -1;
+int insert_piece(char plateau[LI][COL], int colonne, int joueur){
+    colonne = colonne - 1;
 
-      if(colonne < 0 || colonne >= COL){
-         return 0;
-      }
-      if(joueur != joueur1 && joueur != joueur2){
-         return 0;
-
-      for (int ligne = LI -1; ligne>=0; ligne--){
-         if (plateau[ligne][colonne] == VIDE){
-            plateau[ligne][colonne] = joueur;
-            return1;
-         }
-         if (plateau[ligne][colonne] == blok){
-            continue;
-         }
-      }
-      }
+    if(colonne < 0 || colonne >= COL){
        return 0;
-   }
+    }
+    if(joueur != joueur1 && joueur != joueur2){
+       return 0;
+    }
+
+    if (plateau[0][colonne] != VIDE) {
+       return 0; 
+    }
+
+    
+    for (int ligne = 0; ligne < LI; ligne++) {
+       
+       if (ligne == LI - 1 || plateau[ligne + 1][colonne] != VIDE) {
+          plateau[ligne][colonne] = joueur;
+          return 1; 
+       }
+    }
+    
+    return 0;
+}
    
 
 
