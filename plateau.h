@@ -1,6 +1,8 @@
 
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h> 
 #define VIDE  0
 #define COL 8
 #define LI 6
