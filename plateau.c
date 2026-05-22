@@ -1,4 +1,5 @@
-    #include "plateau.h"
+
+#include "plateau.h"
 
 void init_plateau(char plateau[LI][COL]){
     for (int l = 0; l < LI; l++){
@@ -62,146 +63,85 @@ int insert_piece(char plateau[LI][COL], int colonne, int joueur){
     return 0;
 }
    
-
-
-int check_horizontal(int board[LI][COL], int player){
+int check_horizontal(char board[LI][COL], int player){
    int compteur;
-
    for (int ligne = 0; ligne < LI; ligne++){
-     compteur = 0;
-
-     for (int colonne = 0; colonne < COL; colonne++){
-       if (board[ligne][colonne] == player){
-         compteur++;
-       
-
-       if (compteur == 5){
-         return 1;
-       }
-           
+      compteur = 0;
+      for (int colonne = 0; colonne < COL; colonne++){
+         if (board[ligne][colonne] == player){
+            compteur++;
+            if (compteur == 5){
+               return 1;
+            }
+         } else {
+            compteur = 0;
+         }
+      }
    }
-   else
-   {
-       compteur = 0;
-     }
-  }
+   return 0;
 }
 
-return 0;
-}
-
-
-
-
-int check_vertical(int board[LI][COL], int player){
+int check_vertical(char board[LI][COL], int player){
     int compteur;
-
     for (int colonne = 0; colonne < COL; colonne++){
        compteur = 0;
-
        for (int ligne = 0; ligne < LI; ligne++){
           if (board[ligne][colonne] == player){
              compteur++;
-
-             if (compteur == 5)
-                return 1;
-         }
-         else{
+             if (compteur == 5) return 1;
+          } else {
              compteur = 0;
           }
-      } 
-   }
-
-   return 0;
+       } 
+    }
+    return 0;
 }
 
-int check_diag_right(int board[LI][COL], int player) 
-{
+int check_diag_right(char board[LI][COL], int player) {
    for (int ligne = 0; ligne < LI; ligne++) {
-      for (int colonne = 0; colonne < COL; colonne++) 
-      {
+      for (int colonne = 0; colonne < COL; colonne++) {
          int compteur = 0;
-         for (int i = 0; i < 5; i++) 
-         {
+         for (int i = 0; i < 5; i++) {
             int nvl_li = ligne + i;
             int nvl_col = colonne + i;
             
-            if (nvl_li >= LI || nvl_col >= COL){
-               break;}
+            if (nvl_li >= LI || nvl_col >= COL) break;
          
-            if (board[nvl_li][nvl_col] == player){
-               compteur++;
-            }
-            else{
-               break;
-            }
-
+            if (board[nvl_li][nvl_col] == player) compteur++;
+            else break;
          }
-
-         if (compteur == 5){
-            return 1;
-         }
-         
+         if (compteur == 5) return 1;
       }      
    }
-
    return 0;
 }
 
-int check_diag_left(int board[LI][COL], int player) 
-{
-   for (int ligne = 0; ligne < LI; ligne++) 
-   {
+int check_diag_left(char board[LI][COL], int player) {
+   for (int ligne = 0; ligne < LI; ligne++) {
       for (int colonne = 0; colonne < COL; colonne++) {
          int compteur = 0;
          for (int i = 0; i < 5; i++) {
             int nvl_li = ligne + i;
             int nvl_col = colonne - i;
             
-            if (nvl_li >= LI || nvl_col < 0){
-               break;
-            }
-            if (board[nvl_li][nvl_col] == player){
-               compteur++;
-            }
-            else{
-               break;
-            }
+            if (nvl_li >= LI || nvl_col < 0) break;
+            
+            if (board[nvl_li][nvl_col] == player) compteur++;
+            else break;
          }
-         if (compteur == 5){
-            return 1;
-         }
-         
+         if (compteur == 5) return 1;
       }
    }
-
    return 0;
 }
 
-int check_win(int board[LI][COL], int player) {
-   if (check_horizontal(board, player)){
-      return 1;
-   }
-   
-
-   if (check_vertical(board, player)){
-   return 1;
-}
-
-
-   if (check_diag_right(board, player)){
-   return 1;
-}
-
-
-   if (check_diag_left(board, player)){
-   return 1;
-}
-
-
+int check_win(char board[LI][COL], int player) {
+   if (check_horizontal(board, player)) return 1;
+   if (check_vertical(board, player)) return 1;
+   if (check_diag_right(board, player)) return 1;
+   if (check_diag_left(board, player)) return 1;
    return 0;
 }
-return 1;
 
 int zone_valide(int pivot_LI, int pivot_COL, int size) {
     int offset = size / 2;
@@ -220,11 +160,14 @@ int zone_valide(int pivot_LI, int pivot_COL, int size) {
 }
 
 
-void rotation_zone(int plateau[LI][COL], int pivot_LI, int pivot_COL, int size, int sens_horloge) {
+void rotation_zone(char plateau[LI][COL], int pivot_LI, int pivot_COL, int size, int sens_horloge) {
     int offset = size / 2;
     int debut_LI= pivot_LI - offset;
     int debut_COL = pivot_COL - offset;
     int temp[size][size];
+    
+    srand(time(NULL));
+
 
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
@@ -243,4 +186,19 @@ void rotation_zone(int plateau[LI][COL], int pivot_LI, int pivot_COL, int size, 
     }
 }
 
-
+void appliquer_gravite(char plateau[LI][COL]) {
+    for (int j = 0; j < COL; j++) {
+        
+        for (int etape = 0; etape < LI; etape++) {
+            for (int i = LI - 2; i >= 0; i--) {
+                
+                if (plateau[i][j] != VIDE && plateau[i][j] != 'I' && plateau[i][j] != blok) { 
+                    if (plateau[i + 1][j] == VIDE) {
+                        plateau[i + 1][j] = plateau[i][j]; 
+                        plateau[i][j] = VIDE;              
+                    }
+                }
+            }
+        }
+    }
+}
