@@ -23,8 +23,8 @@ Entrez "make" dans le terminale puis pour lancer "./exec"
 Menu de démarrage:
 
 Au lancement, choisir :
-`1` pour démarrer une nouvelle partie
-`2` pour charger une partie sauvegardée 
+'1' pour démarrer une nouvelle partie
+'2' pour charger une partie sauvegardée 
 
 Pendant la partie:
 
@@ -41,17 +41,17 @@ programme propose un exemple de pivot valide pour aider le joueur.
 
 Sauvegarder en cours de partie:
 
-À n'importe quel moment, quand on vous demande une colonne, taper `0` au
-lieu d'un numéro de colonne. La partie est sauvegardée dans `partie.txt`
-et le programme se ferme. Au prochain lancement, choisir `2` dans le menu
+À n'importe quel moment, quand on vous demande une colonne, taper '0' au
+lieu d'un numéro de colonne. La partie est sauvegardée dans 'partie.txt'
+et le programme se ferme. Au prochain lancement, choisir '2' dans le menu
 pour reprendre.
 
 Symboles à l'écran:
 
-`X` (rouge)  : pièce du joueur 1
-`O` (bleu)   : pièce du joueur 2
-`#` (blanc)  : bloc indestructible
--`.`         : case vide
+'X' (rouge)  : pièce du joueur 1
+'O' (bleu)   : pièce du joueur 2
+'#' (blanc)  : bloc indestructible
+'.'          : case vide
 
 Structure:
 
