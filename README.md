@@ -46,21 +46,18 @@ lieu d'un numéro de colonne. La partie est sauvegardée dans `partie.txt`
 et le programme se ferme. Au prochain lancement, choisir `2` dans le menu
 pour reprendre.
 
-Symboles à l'écran
+Symboles à l'écran:
 
 `X` (rouge)  : pièce du joueur 1
 `O` (bleu)   : pièce du joueur 2
 `#` (blanc)  : bloc indestructible
 -`.`         : case vide
 
-## Structure du projet
+Structure:
 
-├── board.h     # Constantes et prototypes du plateau
-├── board.c     # Implémentation : init, affichage, insertion,
-│               # rotation, gravité, détection de victoire
-├── save.h      # Sauvegarde d'une partie en cours
-├── save.c      # Implémentation : lecture/écriture de partie.txt
-├── main.c      # Programme principal : menu, boucle de jeu, saisies
-├── Makefile    # Fichier de compilation
-└── README.md   # Ce fichier
+board.h / board.c : gestion du plateau (init, affichage, insertion,
+rotation, gravité, détection de victoire)
+save.h / save.c   : sauvegarde et chargement de partie
+main.c              : programme principal et boucle de jeu
+Makefile            : compilation
 
